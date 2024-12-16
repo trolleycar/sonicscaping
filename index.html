@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Phomenomenon</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" >
+  <link href="style.css" rel="stylesheet">
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+</head>
+<body>
+<a-assets>
+  <video id="myVideo" src="https://files.catbox.moe/jedlam.mp4" crossorigin="anonymous" loop="true"></video>
+  <audio id="boiling-soup"
+  src="https://files.catbox.moe/3xof6k.m4a"
+  loop="true"
+  crossorigin="anonymous"
+  ></audio>
+</a-assets>
+<a-scene>
+<button id="playButton" style="position: absolute; bottom: 20px; left: 20px; z-index: 999;">Play Video and Sound</button>
+
+<a-sky src="https://images.unsplash.com/photo-1598585774711-f7638e3e3520?q=80&w=2655&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></a-sky>
+
+<a-plane src="https://plus.unsplash.com/premium_photo-1675876270181-327c8a46f200?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" rotation="-90 0 0"
+width="1000" height="1000" material="repeat: 500 500 ;"></a-plane>
+
+<a-gltf-model id="chopsticks-1"src="https://files.catbox.moe/i56zja.glb" position="-10 -12 -100" rotation="-2 0 -2" scale="0.5 0.5 0.5"></a-gltf-model>
+
+<a-gltf-model id="chopsticks-2"src="https://files.catbox.moe/i56zja.glb" position="10 -12 -80" rotation="-2 0 -2" scale="0.5 0.5 0.5"></a-gltf-model>
+
+<a-gltf-model id="pho-bowl" src="https://files.catbox.moe/85sxtg.glb" position="2 3 -45" scale="0.5 0.5 0.5" rotation="90 0 0" animation="property:rotation; to: 0 360 0; dur: 4000; loop: true"></a-gltf-model>
+
+<a-box id="myBox" src= "#myVideo" width= "8" height="10" depth="6" position="-4.5 0 -10"></a-box>
+
+<a-gltf-model class="door" src="https://files.catbox.moe/93y9ay.glb" scale="0.2 0.2 0.2" position="-3 0 -10.5"></a-gltf-model>
+
+<a-gltf-model class="roof" src="https://files.catbox.moe/uxeaab.glb" scale="0.6 0.6 0.6" position ="2.5 5 -7">
+
+<a-box src= "#myVideo" width= "8" height="10" depth="6" position="-29.5 -3 -10"></a-box>
+
+<a-gltf-model class="door" src="https://files.catbox.moe/93y9ay.glb" scale="0.2 0.2 0.2" position="-28 -8 -10.5"></a-gltf-model>
+
+<a-gltf-model class="roof" src="https://files.catbox.moe/uxeaab.glb" scale="0.6 0.6 0.6" position ="-22.5 2 -8">
+
+</a-gltf-model>
+
+  <a-text value="It's a Phomenomenon!'" position="0 0 -4" animation="property:position; to: 0 0 4; dur: 4000; loop: true"></a-text>
+
+</a-scene>
+  <script src="script.js"></script>
+  <script>
+    const box = document.querySelector('#myBox');
+const video = document.querySelector('#myVideo');
+// Add an event listener to the sphere to play/pause the video on click
+box.addEventListener('click', () => {
+if (video.paused) {
+video.play();
+} else {
+video.pause();
+}
+});
+  document.addEventListener('DOMContentLoaded', () => {
+    const mediaElements = document.querySelectorAll('video, audio');
+    const playButton = document.querySelector('#playButton');
+
+    playButton.addEventListener('click', () => {
+      mediaElements.forEach(media => {
+        if (media.paused) {
+          media.play();
+          playButton.textContent = 'Pause Video and Sound';
+        } else {
+          media.pause();
+          playButton.textContent = 'Play Video and Sound';
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
