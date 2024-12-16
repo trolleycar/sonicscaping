@@ -7,3 +7,5 @@ This project explores the relationship between sound and space, and how music ca
 Viewers can embark on a journey to explore the sources of different sounds in the space.
 
 This project uses the A-frame javascript library.
+
+View the website at https://trolleycar.github.io/sonicscapes/
