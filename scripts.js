@@ -1,26 +1,69 @@
-const track1 = document.getElementById('track1');
-const track2 = document.getElementById('track2');
-const playButton = document.getElementById('play');
-const pauseButton = document.getElementById('pause');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const moodSelect = document.getElementById('mood');
 
-// Event listener to start playback
-playButton.addEventListener('click', () => {
-    track1.play(); // Start playing track 1
+let isPlaying = false;
+let currentMood = '';
+
+const tracks = {
+  unsettling: {
+    track1: document.getElementById('track1'),
+    track2: document.getElementById('track2'),
+  },
+  melancholic: {
+    track4: document.getElementById('track4'),
+  },
+  happy: {
+    track3: document.getElementById('track3'),
+  }
+};
+
+
+function togglePlayPause() {
+  if (isPlaying) {
+    stopAudio();
+    playPauseBtn.textContent = 'Play';
+  } else {
+    playAudio();
+    playPauseBtn.textContent = 'Pause';
+  }
+  isPlaying = !isPlaying;
+}
+
+
+function stopAudio() {
+  for (const mood in tracks) {
+    for (const track in tracks[mood]) {
+      tracks[mood][track].pause();
+      tracks[mood][track].currentTime = 0;  // Reset time to the beginning
+    }
+  }
+}
+
+// Function to play audio based on selected mood
+function playAudio() {
+  const selectedMood = moodSelect.value;
+  if (selectedMood === 'unsettling') {
+    tracks.unsettling.track1.play();
+    tracks.unsettling.track1.onended = () => {
+      tracks.unsettling.track2.play();
+      tracks.unsettling.track2.loop = true;
+    };
+  } else if (selectedMood === 'happy') {
+    tracks.happy.track3.play();
+    tracks.happy.track3.loop = true;
+  } else if (selectedMood === 'melancholic') {
+    tracks.melancholic.track4.play();
+    tracks.melancholic.track4.loop = true;
+  }
+}
+
+// Event listener for mood selection change
+moodSelect.addEventListener('change', () => {
+  if (isPlaying) {
+    stopAudio();
+    playAudio();
+  }
 });
 
-// Pause button for both tracks
-pauseButton.addEventListener('click', () => {
-    track1.pause();
-    track2.pause();
-});
-
-// When track 1 ends, start track 2
-track1.addEventListener('ended', () => {
-    track2.play();
-});
-
-// Loop track 2
-track2.addEventListener('ended', () => {
-    track2.currentTime = 0; // Reset to the beginning of track 2
-    track2.play(); // Play track 2 again
-});
+// Event listener for play/pause button
+playPauseBtn.addEventListener('click', togglePlayPause);
