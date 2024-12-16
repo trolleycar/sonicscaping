@@ -8,4 +8,4 @@ Viewers can embark on a journey to explore the sources of different sounds in th
 
 This project uses the A-frame javascript library.
 
-View the website at https://trolleycar.github.io/sonicscapes/
+View the website at https://trolleycar.github.io/sonicscaping/
